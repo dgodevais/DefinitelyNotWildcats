@@ -1,2 +1,2 @@
 # DefinitelyNotWildcats
-team for dg10001
+team for ds1001
