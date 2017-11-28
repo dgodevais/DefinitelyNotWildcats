@@ -24,7 +24,7 @@ def convert_business_json_file_to_csv(json_file_path, csv_file_path):
             for line in old_f:
                 biz_json = json.loads(line)
                 if 'GoodForMeal' in biz_json['attributes']:
-                    biz_cvs = u'{biz_id},{name},{neighborhood},{address},{city},{state},' \
+                    biz_csv = u'{biz_id},{name},{neighborhood},{address},{city},{state},' \
                               u'{postal_code},{latitude},{longitude},{stars},{is_open},' \
                               u'{gf_dessert},{gf_dinner},{gf_latenight},{gf_lunch},{gf_breakfast},{gf_brunch},' \
                               u'{has_tv},{has_delivery},{accept_credit_cards},{outdoor_seating},{takes_reservations},' \
@@ -59,4 +59,4 @@ def convert_business_json_file_to_csv(json_file_path, csv_file_path):
                                 fri_hours=biz_json['hours'].get('Friday', ''),
                                 sat_hours=biz_json['hours'].get('Saturday', ''),
                                 sun_hours=biz_json['hours'].get('Sunday', ''))
-                    new_f.write(biz_cvs)
+                    new_f.write(biz_csv)

@@ -3,6 +3,7 @@ import time
 from businesses_csv_generator import convert_business_json_file_to_csv
 from review_csv_generator import convert_reviews_json_file_to_csv
 from tip_csv_generator import convert_tip_json_file_to_csv
+from checkin_csv_generator import convert_checkins_json_file_to_csv
 
 
 def main():
@@ -22,6 +23,11 @@ def main():
     convert_tip_json_file_to_csv('../yelp-data/yelp_dir/tip.json', '../yelp-data/formatted/tip.csv')
     print "Finished converting the tips json file to csv."
     print "Tips conversion took {} seconds".format((time.time() - tip_start_time))
+
+    checkin_start_time = time.time()
+    convert_checkins_json_file_to_csv('../yelp-data/yelp_dir/checkin.json', '../yelp-data/formatted/checkin.csv')
+    print "Finished converting the checkin json file to csv."
+    print "Checkin conversion took {} seconds".format((time.time() - checkin_start_time))
 
     print "Yelp data formatter process complete!"
     print "Yelp data formatter took {} seconds".format((time.time() - start_time))
