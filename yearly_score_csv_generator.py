@@ -1,8 +1,8 @@
-import pandas as pd
-import numpy as np
-import json
-import datetime as dt
-import csv
+"""
+Reads in review.json file and outputs a csv with following data by column:
+'biz_id', 'total_counts', 'total_stars', 'total_rating',
+ 'last_year_counts', 'last_year_stars', 'last_year_rating'
+"""
 
 rev_dict = {}
 
@@ -45,6 +45,8 @@ for biz_id in rev_dict:
                 
 with open(str('yearly_reviews.csv'), 'w') as csvfile:
     writer = csv.writer(csvfile, delimiter=',')
+    writer.writerow(['biz_id', 'total_counts', 'total_stars', 'total_rating',
+                     'last_year_counts', 'last_year_stars', 'last_year_rating'])
     for biz_id in rev_dict:
         for cur_year in year_starts:
             writer.writerow([str(biz_id), str(cur_year.year), str(rev_dict[biz_id][str(cur_year.year)]['count']), 
@@ -53,4 +55,3 @@ with open(str('yearly_reviews.csv'), 'w') as csvfile:
                 str(rev_dict[biz_id][str(cur_year.year)]['last_year_counts']),
                 str(rev_dict[biz_id][str(cur_year.year)]['last_year_stars']),
                 str(round(rev_dict[biz_id][str(cur_year.year)]['last_year_rating'], 3))])
-
