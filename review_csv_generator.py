@@ -4,7 +4,7 @@ import csv
 import os
 
 
-def convert_reviews_json_file_to_csv(json_file_path, csv_file_path):
+def convert_reviews_json_file_to_first_last_csv(json_file_path, csv_file_path):
     """
     Writes the review.json file into a csv with first and last date for each business
     :param json_file_path: (str) path to the review.json file
