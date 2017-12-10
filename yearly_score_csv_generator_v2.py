@@ -11,6 +11,7 @@ import _strptime
 
 strptime = dt.datetime.strptime
 
+
 def convert_reviews_json_file_to_rating_sentiment_csv(json_file_path, csv_file_path):
     """
     Returns a row for each year a business has been open with an aggregate rating and sentiment
@@ -22,8 +23,8 @@ def convert_reviews_json_file_to_rating_sentiment_csv(json_file_path, csv_file_p
     if not os.path.isdir(write_dir):
         os.mkdir(write_dir)
 
-    def write_rating_dict_to_csv(ratings_dict, out_file_path, header=False):
-        with open(out_file_path, 'a') as out_f:
+    def write_rating_dict_to_csv(ratings_dict, out_file_path, header=False, mode='a'):
+        with open(out_file_path, mode) as out_f:
             if header:
                 out_f.write(
                     "biz_id,year,rating_sum,rating_count,polarity_sum,polarity_count,sentiment_sum,sentiment_count\n")
@@ -75,7 +76,7 @@ def convert_reviews_json_file_to_rating_sentiment_csv(json_file_path, csv_file_p
                     biz_id = cur_rev['business_id']
                     cur_rev_date = strptime(cur_rev['date'], '%Y-%m-%d').date()
                     cur_rev_year = cur_rev_date.year
-                    if cur_rev_year in [2014, 2015, 2016]:
+                    if cur_rev_year in [2011, 2012, 2013, 2014, 2015, 2016]:
                         text_blob_vals = TextBlob(cur_rev['text'])
                         if biz_id not in ratings_dict:
                             ratings_dict[biz_id] = {cur_rev_year: {}}
@@ -158,7 +159,7 @@ def convert_reviews_json_file_to_rating_sentiment_csv(json_file_path, csv_file_p
         return combined
 
     all_ratings = combine_ratings_files(thread_out_files)
-    write_rating_dict_to_csv(all_ratings, csv_file_path, header=True)
+    write_rating_dict_to_csv(all_ratings, csv_file_path, header=True, mode='w')
 
     for thread_file in thread_out_files:
         os.remove(thread_file)
